@@ -15,6 +15,7 @@ public class Application implements Runnable {
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
     int cashCount = 0;
     int foodCount = 0;
+    int level = 3;// level of player game 1-3
     Tile[] tiles;
     Crop[] crops;
 
@@ -35,10 +36,12 @@ public class Application implements Runnable {
         drawBoard();
         crops = cropSetup();
         tiles = tileSetup();
+        drawTiles();
         menu();
     }
     public void menu () {
         drawBoard();
+        drawTiles();
         SaxionApp.printLine("1. Store");
         int selection = SaxionApp.readInt();
 
@@ -124,12 +127,21 @@ public class Application implements Runnable {
         CsvReader reader = new CsvReader("resources/tileindex.csv");
         reader.skipRow();
         reader.setSeparator(',');
+        int topXPos = 784;
+        int topYPos = 58;
+        int i = 0;
         while (reader.loadRow()){
             Tile tile = new Tile();
             tile.tileID = reader.getString(0);
-            tile.tilePosition[0] = reader.getInt(2);
-            tile.tilePosition[1] = reader.getInt(3);
+            tile.tilePosition[0] = topXPos - (i%5)*64;
+            tile.tilePosition[1] = topYPos + (i%5)*32;
             tiles[reader.getInt(1)] = tile;
+            tile.level = reader.getInt(2);
+            i++;
+            if (i%5 == 0){
+                topYPos = topYPos + 32;
+                topXPos = topXPos + 64;
+            }
         }
         return tiles;
     }
@@ -151,5 +163,12 @@ public class Application implements Runnable {
     }
     public void messageBox (String message){
         SaxionApp.drawBorderedText(message, 800, 200, 14);
+    }
+
+    public void drawTiles(){
+        for (int i = 0; i < tiles.length; i++) {
+            Tile tile = tiles[i];
+            tile.drawTile(level);
+        }
     }
 }
