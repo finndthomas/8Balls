@@ -14,6 +14,7 @@ public class Application implements Runnable {
     Player player = new Player();
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
+    int level = 1;// level of player game 1-3
     Tile[] tiles;
     Crop[] crops;
 
@@ -37,7 +38,7 @@ public class Application implements Runnable {
         int[] position = {850,60}; // 0 = X, 1 = Y
         int[] increments = {64,32}; // 0 = X, 1 = Y
 
-        SaxionApp.drawLine(position[0],position[1], position[0]+(increments[0]*5), position[1]+(increments[1]*5)); //top line going right
+        /*SaxionApp.drawLine(position[0],position[1], position[0]+(increments[0]*5), position[1]+(increments[1]*5)); //top line going right
         SaxionApp.drawLine(position[0]-(increments[0]),position[1]+(increments[1]),position[0]+(increments[0]*4), position[1]+(increments[1]*6)); //first divider line, forward slash
         SaxionApp.drawLine(position[0]-(increments[0]*2),position[1]+(increments[1]*2), position[0]+(increments[0]*3), position[1]+(increments[1]*7)); //second divider line, forward slash
         SaxionApp.drawLine(position[0]-(increments[0]*3),position[1]+(increments[1]*3), position[0]+(increments[0]*2), position[1]+(increments[1]*8)); //third divider line, forward slash
@@ -51,14 +52,14 @@ public class Application implements Runnable {
 
         SaxionApp.drawLine(position[0]-(increments[0]*5),position[1]+(increments[1]*5), position[0], position[1]+(increments[1]*10)); //bottom left line going down
         SaxionApp.drawLine(position[0],position[1]+(increments[1]*10), position[0]+(increments[0]*5), position[1]+(increments[1]*5));//bottom right line going down
-
+        */
         SaxionApp.setBorderSize(0);
         drawTiles();
         messageBox(String.valueOf(player.foodCount));
     }
     public void drawTiles(){
         for (Tile tile: tiles) {
-            SaxionApp.drawImage(tile.tilePicture,tile.tilePosition[0],tile.tilePosition[1],128,64);
+            tile.drawTile(level);
         }
     }
     public void menu () {
@@ -330,12 +331,24 @@ public class Application implements Runnable {
         CsvReader reader = new CsvReader("resources/tileindex.csv");
         reader.skipRow();
         reader.setSeparator(',');
+        int topXPos = 784;
+        int topYPos = 58;
+        int i = 0;
         while (reader.loadRow()){
             Tile tile = new Tile();
             tile.tileID = reader.getString(0);
-            tile.tilePosition[0] = reader.getInt(2);
-            tile.tilePosition[1] = reader.getInt(3);
+            tile.tilePosition[0] = topXPos - (i%5)*64;
+            tile.tilePosition[1] = topYPos + (i%5)*32;
             tiles[reader.getInt(1)] = tile;
+            tile.level = reader.getInt(2);
+            if (tile.level > 1){
+                tile.occupied[0] = true;
+            }
+            i++;
+            if (i%5 == 0){
+                topYPos = topYPos + 32;
+                topXPos = topXPos + 64;
+            }
         }
         return tiles;
     }
