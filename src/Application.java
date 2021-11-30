@@ -57,11 +57,15 @@ public class Application implements Runnable {
 
             case '2':
                 //tutorial
+                SaxionApp.clear();
                 tutorial();
+                SaxionApp.pause();
+                SaxionApp.clear();
+                mainMenu();
                 break;
             case '3':
                 break;
-            case '4':
+            default:
                 SaxionApp.printLine("Invalid selection", Color.red);
                 SaxionApp.sleep(1);
                 mainMenu();
@@ -130,6 +134,11 @@ public class Application implements Runnable {
                 }
             case '3':
                 nextDay();
+                break;
+            default:
+                SaxionApp.printLine("Invalid selection", Color.red);
+                SaxionApp.sleep(1);
+                shopMenu();
                 break;
         }
     }
