@@ -522,12 +522,10 @@ public class Application implements Runnable {
             menu();
         }
     }
-
     public void statistic() {
         SaxionApp.clear();
 
     }
-
     public void drawsun() {
         SaxionApp.clear();
         ArrayList<Color> sunrisecolor = new ArrayList<>();
