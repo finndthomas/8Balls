@@ -8,8 +8,9 @@ import java.util.ArrayList;
 public class Application implements Runnable {
 
     public static void main(String[] args) {
-        SaxionApp.start(new Application(), 1200, 600);
+        SaxionApp.start(new Application(),  1200, 600);
     }
+
     //48 to 57 are accepted integer ASCII's
     Player player = new Player();
     int dayCount = 1;//Season change every 30 days
@@ -21,22 +22,135 @@ public class Application implements Runnable {
     public void run() {
         initialization();
     }
-    public void initialization (){
+
+    //Step 1.1 Menu(Harun)
+    public void mainMenu() {
+        drawBoard();
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("Welcome to the FarmX");
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("1. New Game");
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("2. Tutorial");
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("3. Quit");
+        SaxionApp.printLine(" ");
+        SaxionApp.print("Please enter your choice: ");
+        int selection = SaxionApp.readInt();
+
+        switch (selection) {
+            case 1:
+
+                //new game;
+                SaxionApp.clear();
+                drawBoard();
+                tutorial();
+                SaxionApp.pause();
+                SaxionApp.clear();
+                shopMenu();
+                drawBoard();
+                break;
+            case 2:
+                //tutorial
+                tutorial();
+                break;
+            case 3:
+                //quit
+        }
+
+    }
+
+    //Step 1.2 ShopMenu(Harun)
+    public void shopMenu() {
+        drawBoard();
+        SaxionApp.printLine("STORE");
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("1. Plants");
+        SaxionApp.printLine("2. Animals");
+        int ss = SaxionApp.readInt();
+
+        switch (ss) {
+            case 1:
+                SaxionApp.clear();
+                drawBoard();
+                SaxionApp.printLine("1. Buy");
+
+                SaxionApp.printLine("2. Sell");
+
+                int s = SaxionApp.readInt();
+                switch (s) {
+                    case 1:
+                        //buy
+                        SaxionApp.clear();
+                        drawBoard();
+                        cropsMenu();
+                        break;
+                    case 2:
+                        //sell
+                        break;
+                }
+                break;
+            case 2:
+                SaxionApp.clear();
+                drawBoard();
+                SaxionApp.printLine("1. Buy");
+                SaxionApp.printLine(" ");
+                SaxionApp.printLine("2. Sell");
+                SaxionApp.printLine(" ");
+                int sss = SaxionApp.readInt();
+                switch (sss) {
+                    case 1:
+                        //buy
+                        SaxionApp.clear();
+                        drawBoard();
+                        cropsMenu();
+                        break;
+                    case 2:
+                        //sell
+                        break;
+                }
+                break;
+        }
+    }
+
+    //Step 2 Tutorial(Harun)
+    public void tutorial() {
+        SaxionApp.turnBorderOff();
+        SaxionApp.setFill(Color.gray);
+        int y = 100;
+        int x = 150;
+
+        SaxionApp.drawRectangle(x, y, 850, 400);
+        SaxionApp.drawText("GAME TUTORIAL", x + 300, y + 50, 25);
+        SaxionApp.drawText("Welcome to FarmX!", x + 30, y + 100, 13);
+        SaxionApp.drawText("For the begining, I would like to introduce the game.", x + 30, y + 120, 13);
+        SaxionApp.drawText("*This game is a farming simulating game and this game is based on getting daily harvesting", x + 30, y + 140, 13);
+        SaxionApp.drawText("*The game gives 5000$ to at the beginning and you can buy vegetables seeds and animals with this money.", x + 30, y + 160, 13);
+        SaxionApp.drawText("*Every seeds have different features. For example, if you buy a tomato seed for your field, firstly you have to pay 10$ for a seed.", x + 30, y + 180, 13);
+        SaxionApp.drawText("A tomato seed grows up in one day. When you continue for the other day, you'll get 20$ for harvest.", x + 30, y + 200, 13);
+        SaxionApp.drawText("*You are going to start the game at LEVEL 1. This means you can buy only first 4 types of vegetables seeds. And the game", x + 30, y + 220, 13);
+        SaxionApp.drawText("gives 4 empty fields for you. You will get new 2 fields at further levels and also you can unlock a field by purchasing.", x + 30, y + 240, 13);
+        SaxionApp.drawText("Press any key to skip the tutorial >>", x+500, 450, 15);
+    }
+
+
+    public void initialization() {
         SaxionApp.setFill(Color.black);
         crops = cropSetup();
         tiles = tileSetup();
         drawBoard();
-        menu();
+        mainMenu();
     }
-    public void drawBoard () {
+
+    public void drawBoard() {
         SaxionApp.clear();
-        SaxionApp.drawImage("resources/background.jpeg", 0, 0,1200,600);
+        SaxionApp.drawImage("resources/background.jpeg", 0, 0, 1200, 600);
         //starting pos x+400 and y+100
         SaxionApp.setBorderSize(2);
         SaxionApp.setBorderColor(Color.white);
 
-        int[] position = {850,60}; // 0 = X, 1 = Y
-        int[] increments = {64,32}; // 0 = X, 1 = Y
+        int[] position = {850, 60}; // 0 = X, 1 = Y
+        int[] increments = {64, 32}; // 0 = X, 1 = Y
 
         /*SaxionApp.drawLine(position[0],position[1], position[0]+(increments[0]*5), position[1]+(increments[1]*5)); //top line going right
         SaxionApp.drawLine(position[0]-(increments[0]),position[1]+(increments[1]),position[0]+(increments[0]*4), position[1]+(increments[1]*6)); //first divider line, forward slash
@@ -57,12 +171,14 @@ public class Application implements Runnable {
         drawTiles();
         messageBox(String.valueOf(player.foodCount));
     }
-    public void drawTiles(){
-        for (Tile tile: tiles) {
+
+    public void drawTiles() {
+        for (Tile tile : tiles) {
             tile.drawTile(level);
         }
     }
-    public void menu () {
+    /*
+    public void menu() {
         drawBoard();
         SaxionApp.printLine("0. Shop");
         SaxionApp.printLine("1. Sell Food or Stock");
@@ -73,11 +189,14 @@ public class Application implements Runnable {
             case 1 -> sell();
         }
     }
-    public void sell (){
+
+    */
+
+    public void sell() {
         drawBoard();
         char selection;
         do {
-            int[] counters = {0,0};
+            int[] counters = {0, 0};
             ArrayList<Integer> keyPairs = new ArrayList<>();
             SaxionApp.printLine("0. Back");
             SaxionApp.printLine();
@@ -99,14 +218,13 @@ public class Application implements Runnable {
                 SaxionApp.printLine((counters[0] + 1) + ". Sell all");
             }
             selection = SaxionApp.readChar();
-            if ((selection-48) < 0 || (selection-48) > counters[0]){
-                SaxionApp.printLine("Invalid selection",Color.red);
+            if ((selection - 48) < 0 || (selection - 48) > counters[0]) {
+                SaxionApp.printLine("Invalid selection", Color.red);
                 SaxionApp.sleep(1);
                 SaxionApp.removeLastPrint();
-            }
-            else {
+            } else {
                 if (selection - 48 == 0) {
-                    menu();
+                    shopMenu();
                 } else {
                     SaxionApp.printLine();
                     SaxionApp.printLine("Quantity?");
@@ -144,10 +262,12 @@ public class Application implements Runnable {
                     }
                 }
             }
-        } while (selection-48 != 0);
-        menu();
+        } while (selection - 48 != 0);
+        mainMenu();
     }
-    public void shop(){
+
+    /*
+    public void shop() {
         drawBoard();
         SaxionApp.printLine("0. Back");
         SaxionApp.printLine("1. Crops");
@@ -158,70 +278,71 @@ public class Application implements Runnable {
             case 1 -> cropsMenu();
         }
     }
-    public void cropsMenu(){
+
+     */
+
+    public void cropsMenu() {
         drawBoard();
         int i = 0;
         SaxionApp.printLine("0. Back");
-        for (Crop crop: crops) {
+        for (Crop crop : crops) {
             String month = String.valueOf(crop.season);
-            switch (month){
+            switch (month) {
                 case "1" -> month = "Summer";
                 case "2" -> month = "Autumn";
                 case "3" -> month = "Spring";
                 case "4" -> month = "Winter";
             }
-            SaxionApp.printLine((i+1)+". "+crop.cropName+" - $"+crop.cost+" - "
-                    +crop.dayCountdown+" Day/s - ▲"+crop.foodPayout+" - "+month+" ");
+            SaxionApp.printLine((i + 1) + ". " + crop.cropName + " - $" + crop.cost + " - "
+                    + crop.dayCountdown + " Day/s - ▲" + crop.foodPayout + " - " + month + " ");
             i++;
         }
 
-        boolean[] accepted = {false,false}; //[0]0-8 Crop Selection, [1] QuantityVSCost Selection
+        boolean[] accepted = {false, false}; //[0]0-8 Crop Selection, [1] QuantityVSCost Selection
         char selection;
         do {
             selection = SaxionApp.readChar();
-            if (selection < 48 || selection > 56){
-                SaxionApp.printLine("Must be between 0 and 8",Color.red);
+            if (selection < 48 || selection > 56) {
+                SaxionApp.printLine("Must be between 0 and 8", Color.red);
                 SaxionApp.sleep(1);
                 SaxionApp.removeLastPrint();
+            } else {
+                accepted[0] = true;
             }
-                else { accepted[0] = true; }
-            }
+        }
         while (!accepted[0]);
 
-        if (selection == '0'){
-                shop();
-            }
-            else {
-                while (!accepted[1]) {
-                    SaxionApp.printLine();
-                    SaxionApp.printLine("Quantity?");
-                    int quantity = SaxionApp.readInt();
-                    if (quantity * crops[selection - 49].cost > player.cashCount) {
-                        SaxionApp.printLine("You do not have enough cash for this",Color.red);
-                        SaxionApp.sleep(1);
-                        SaxionApp.clear();
-                        cropsMenu();
+        if (selection == '0') {
+            shopMenu();
+        } else {
+            while (!accepted[1]) {
+                SaxionApp.printLine();
+                SaxionApp.printLine("Quantity?");
+                int quantity = SaxionApp.readInt();
+                if (quantity * crops[selection - 49].cost > player.cashCount) {
+                    SaxionApp.printLine("You do not have enough cash for this", Color.red);
+                    SaxionApp.sleep(1);
+                    SaxionApp.clear();
+                    cropsMenu();
+                } else {
+                    int counter = 0;
+                    for (Tile tile : tiles) {
+                        if (!tile.occupied[0] && !tile.occupied[1]) {
+                            counter++;
+                        }
                     }
-                    else {
-                        int counter = 0;
-                        for (Tile tile: tiles) {
-                            if (!tile.occupied[0] && !tile.occupied[1]){
-                               counter++;
-                            }
-                        }
-                        if (counter < quantity) {
-                            SaxionApp.printLine("Not enough empty tiles");
-                            SaxionApp.pause();
-                            SaxionApp.removeLastPrint();
-                            SaxionApp.removeLastPrint();
-                        }
-                        else {
-                            SaxionApp.printLine();
-                            SaxionApp.printLine("Confirm? (Y/N)");
-                            SaxionApp.printLine(crops[selection - 49].cropName + " x" + quantity + " for $"
-                                    + quantity * crops[selection - 49].cost + "?", Color.green);
-                            char entry = SaxionApp.readChar();
-                            do {
+                    if (counter < quantity) {
+                        SaxionApp.printLine("Not enough empty tiles");
+                        SaxionApp.pause();
+                        SaxionApp.removeLastPrint();
+                        SaxionApp.removeLastPrint();
+                    } else {
+                        SaxionApp.printLine();
+                        SaxionApp.printLine("Confirm? (Y/N)");
+                        SaxionApp.printLine(crops[selection - 49].cropName + " x" + quantity + " for $"
+                                + quantity * crops[selection - 49].cost + "?", Color.green);
+                        char entry = SaxionApp.readChar();
+                        do {
                             entry = Character.toUpperCase(entry);
                             switch (entry) {
                                 case 'Y' -> {
@@ -238,69 +359,67 @@ public class Application implements Runnable {
 
                                 }
                             }
-                            } while (entry != 'Y' && entry != 'N');
-                        }
+                        } while (entry != 'Y' && entry != 'N');
                     }
                 }
             }
         }
-    public void assignToTile (char indexNumber, int quantity, int identifier) {
+    }
+
+    public void assignToTile(char indexNumber, int quantity, int identifier) {
         int count = quantity;
         for (int i = 0; i < 5; i++) {
             SaxionApp.removeLastPrint();
         }
-        if (!player.automaticPopulation){
+        if (!player.automaticPopulation) {
             boolean accepted = false;
             while (!accepted) {
                 SaxionApp.printLine("Enter tile coordinates (number then letter)");
                 String selection = SaxionApp.readString();
-                if (selection.length() != 2){
+                if (selection.length() != 2) {
                     SaxionApp.printLine("Only enter two characters (e.g 3C)", Color.red);
                     SaxionApp.sleep(1);
                     for (int i = 0; i < 3; i++) {
                         SaxionApp.removeLastPrint();
                     }
-                }
-                else {
-                    String letterUppercase = selection.substring(1,2).toUpperCase();
-                    String[] acceptedValues = {"12345","ABCDE"};
-                        if (!acceptedValues[0].contains(selection.substring(0,1)) ||
-                                !acceptedValues[1].contains(letterUppercase)){
-                            SaxionApp.printLine("Invalid selection", Color.red);
-                            SaxionApp.sleep(1);
-                            for (int i = 0; i < 3; i++) {
-                                SaxionApp.removeLastPrint();
-                            }
+                } else {
+                    String letterUppercase = selection.substring(1, 2).toUpperCase();
+                    String[] acceptedValues = {"12345", "ABCDE"};
+                    if (!acceptedValues[0].contains(selection.substring(0, 1)) ||
+                            !acceptedValues[1].contains(letterUppercase)) {
+                        SaxionApp.printLine("Invalid selection", Color.red);
+                        SaxionApp.sleep(1);
+                        for (int i = 0; i < 3; i++) {
+                            SaxionApp.removeLastPrint();
                         }
-                        else {
-                            String ID = selection.charAt(0)+letterUppercase;
-                            for (Tile tile: tiles) {
-                                if (tile.tileID.equals(ID)){
-                                    if (tile.occupied[0] || tile.occupied[1]){
-                                        SaxionApp.printLine("Tile is already occupied, or locked", Color.red);
-                                        SaxionApp.sleep(1);
-                                        for (int i = 0; i < 3; i++) {
-                                            SaxionApp.removeLastPrint();
-                                        }
+                    } else {
+                        String ID = selection.charAt(0) + letterUppercase;
+                        for (Tile tile : tiles) {
+                            if (tile.tileID.equals(ID)) {
+                                if (tile.occupied[0] || tile.occupied[1]) {
+                                    SaxionApp.printLine("Tile is already occupied, or locked", Color.red);
+                                    SaxionApp.sleep(1);
+                                    for (int i = 0; i < 3; i++) {
+                                        SaxionApp.removeLastPrint();
                                     }
-                                    else {
-                                        tile.occupied[1] = true;
-                                        tile.tileResourceName = crops[indexNumber-49].cropName;
-                                        tile.dayCountdown = crops[indexNumber-49].dayCountdown;
-                                        tile.season = crops[indexNumber-49].season;
-                                        tile.tilePicture = "resources/tile_images/"+tile.tileResourceName+".png";
-                                        drawTiles();
-                                        SaxionApp.printLine(crops[indexNumber-49].cropName+" successfully planted",Color.green);
-                                        SaxionApp.sleep(1);
-                                        for (int i = 0; i < 3; i++) {
-                                            SaxionApp.removeLastPrint();
-                                        }
-                                        player.cashCount -= crops[indexNumber-49].cost;
-                                        if (count == 1) {
-                                            accepted = true;
-                                            menu();
-                                        }
-                                        else {count--;}
+                                } else {
+                                    tile.occupied[1] = true;
+                                    tile.tileResourceName = crops[indexNumber - 49].cropName;
+                                    tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
+                                    tile.season = crops[indexNumber - 49].season;
+                                    tile.tilePicture = "resources/tile_images/" + tile.tileResourceName + ".png";
+                                    drawTiles();
+                                    SaxionApp.printLine(crops[indexNumber - 49].cropName + " successfully planted", Color.green);
+                                    SaxionApp.sleep(1);
+                                    for (int i = 0; i < 3; i++) {
+                                        SaxionApp.removeLastPrint();
+                                    }
+                                    player.cashCount -= crops[indexNumber - 49].cost;
+                                    if (count == 1) {
+                                        accepted = true;
+                                        shopMenu();
+                                    } else {
+                                        count--;
                                     }
                                 }
                             }
@@ -308,25 +427,26 @@ public class Application implements Runnable {
                     }
                 }
             }
-        else {
-            for (Tile tile: tiles) {
-                if (!tile.occupied[0] && !tile.occupied[1] && count > 0){
+        } else {
+            for (Tile tile : tiles) {
+                if (!tile.occupied[0] && !tile.occupied[1] && count > 0) {
                     tile.occupied[1] = true;
-                    tile.tileResourceName = crops[indexNumber-49].cropName;
-                    tile.dayCountdown = crops[indexNumber-49].dayCountdown;
-                    tile.season = crops[indexNumber-49].season;
-                    tile.tilePicture = "resources/tile_images/"+tile.tileResourceName+".png";
+                    tile.tileResourceName = crops[indexNumber - 49].cropName;
+                    tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
+                    tile.season = crops[indexNumber - 49].season;
+                    tile.tilePicture = "resources/tile_images/" + tile.tileResourceName + ".png";
                     drawTiles();
-                    SaxionApp.printLine(crops[indexNumber-49].cropName+" successfully planted",Color.green);
+                    SaxionApp.printLine(crops[indexNumber - 49].cropName + " successfully planted", Color.green);
                     SaxionApp.sleep(1);
-                    player.cashCount -= crops[indexNumber-49].cost;
+                    player.cashCount -= crops[indexNumber - 49].cost;
                     count--;
                 }
             }
-            menu();
+            mainMenu();
         }
-        }
-    public Tile[] tileSetup(){
+    }
+
+    public Tile[] tileSetup() {
         Tile[] tiles = new Tile[25];
         CsvReader reader = new CsvReader("resources/tileindex.csv");
         reader.skipRow();
@@ -334,30 +454,31 @@ public class Application implements Runnable {
         int topXPos = 784;
         int topYPos = 58;
         int i = 0;
-        while (reader.loadRow()){
+        while (reader.loadRow()) {
             Tile tile = new Tile();
             tile.tileID = reader.getString(0);
-            tile.tilePosition[0] = topXPos - (i%5)*64;
-            tile.tilePosition[1] = topYPos + (i%5)*32;
+            tile.tilePosition[0] = topXPos - (i % 5) * 64;
+            tile.tilePosition[1] = topYPos + (i % 5) * 32;
             tiles[reader.getInt(1)] = tile;
             tile.level = reader.getInt(2);
-            if (tile.level > 1){
+            if (tile.level > 1) {
                 tile.occupied[0] = true;
             }
             i++;
-            if (i%5 == 0){
+            if (i % 5 == 0) {
                 topYPos = topYPos + 32;
                 topXPos = topXPos + 64;
             }
         }
         return tiles;
     }
-    public Crop[] cropSetup(){
+
+    public Crop[] cropSetup() {
         Crop[] crops = new Crop[8];
         CsvReader reader = new CsvReader("resources/crops.csv");
         reader.skipRow();
         reader.setSeparator(',');
-        while (reader.loadRow()){
+        while (reader.loadRow()) {
             Crop crop = new Crop();
             crop.cropName = reader.getString(0);
             crop.cost = reader.getInt(2);
@@ -368,7 +489,8 @@ public class Application implements Runnable {
         }
         return crops;
     }
-    public void messageBox (String message){
+
+    public void messageBox(String message) {
         SaxionApp.setFill(Color.white);
         SaxionApp.drawBorderedText(message, 800, 500, 18);
     }
