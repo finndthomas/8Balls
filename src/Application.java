@@ -106,7 +106,7 @@ public class Application implements Runnable {
                         cropsMenu();
                         break;
                     case '2':
-                        //sell
+                        sellMenu();
                         break;
                     case '0':
                         shopMenu();
@@ -224,7 +224,7 @@ public class Application implements Runnable {
         drawBoard();
         SaxionApp.printLine("0. Back");
         SaxionApp.printLine("1. Sell Food");
-        SaxionApp.printLine("2. Sell Crop");
+        SaxionApp.printLine("2. Convert Crop into Food");
         char selection = SaxionApp.readChar();
 
         switch (selection) {
@@ -296,7 +296,7 @@ public class Application implements Runnable {
             counters[1]++;
         }
         if (counters[0] > 0) {
-            SaxionApp.printLine((counters[0] + 1) + ". Sell all");
+            SaxionApp.printLine((counters[0] + 1) + ". Convert all");
         }
         selection = SaxionApp.readChar();
         if ((selection - 48) < 0 || (selection - 48) > counters[0] + 1) {
@@ -308,7 +308,7 @@ public class Application implements Runnable {
                 sellMenu();
             } else if (selection - 48 == (counters[0]) + 1) {
                 SaxionApp.printLine();
-                SaxionApp.printLine("Sell all crops, confirm? [Y/N]", Color.yellow);
+                SaxionApp.printLine("Convert all crops, confirm? [Y/N]", Color.yellow);
                 char entry = SaxionApp.readChar();
                 do {
                     entry = Character.toUpperCase(entry);
@@ -334,7 +334,7 @@ public class Application implements Runnable {
                 SaxionApp.printLine("Quantity?");
                 quantity = SaxionApp.readInt();
                 if (player.cropStock[keyPairs.get(selection - 49)] < quantity) {
-                    SaxionApp.printLine("You do not have this many to sell", Color.red);
+                    SaxionApp.printLine("You do not have this many to convert", Color.red);
                     SaxionApp.sleep(1);
                     for (int i = 0; i < 3; i++) {
                         SaxionApp.removeLastPrint();
@@ -348,7 +348,7 @@ public class Application implements Runnable {
                 }
             } while (player.cropStock[keyPairs.get(selection - 49)] < quantity || quantity == 0);
             SaxionApp.printLine();
-            SaxionApp.printLine("Confirm sale of " + quantity + "x " + crops[keyPairs.get(selection - 49)].cropName + "? [Y/N]", Color.yellow);
+            SaxionApp.printLine("Confirm conversion of " + quantity + "x " + crops[keyPairs.get(selection - 49)].cropName + "? [Y/N]", Color.yellow);
             char entry = SaxionApp.readChar();
             do {
                 entry = Character.toUpperCase(entry);
@@ -356,7 +356,7 @@ public class Application implements Runnable {
                     case 'Y' -> {
                         player.foodCount += quantity * crops[keyPairs.get(selection - 49)].foodPayout;
                         player.cropStock[keyPairs.get(selection - 49)] -= quantity;
-                        SaxionApp.printLine("Successfully sold " + quantity + "x " + crops[keyPairs.get(selection - 49)].cropName, Color.green);
+                        SaxionApp.printLine("Successfully converted " + quantity + "x " + crops[keyPairs.get(selection - 49)].cropName, Color.green);
                         SaxionApp.sleep(1);
                         sellCrop();
                     }
@@ -382,7 +382,7 @@ public class Application implements Runnable {
                     j++;
                 }
                 if (j > 0) {
-                    SaxionApp.print("Sold " + j + "x " + crops[i].cropName + " for ");
+                    SaxionApp.print("Converted " + j + "x " + crops[i].cropName + " into ");
                     SaxionApp.print("▲" + crops[i].foodPayout * j, Color.green);
                     SaxionApp.print(" food");
                     SaxionApp.printLine();
@@ -551,6 +551,14 @@ public class Application implements Runnable {
                                     tile.occupied[1] = true;
                                     tile.tileResourceName = crops[indexNumber - 49].cropName;
                                     tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
+                                    if (crops[indexNumber - 49].season != season){
+                                        if (crops[indexNumber - 49].dayCountdown == 1){
+                                            tile.dayCountdown++;
+                                        }
+                                        else {
+                                            tile.dayCountdown = (int) ((crops[indexNumber - 49].dayCountdown) * 1.5);
+                                        }
+                                    }
                                     tile.season = crops[indexNumber - 49].season;
                                     tile.tilePicture = "resources/tile_images/" + tile.tileResourceName + ".png";
                                     drawTiles();
@@ -578,6 +586,14 @@ public class Application implements Runnable {
                     tile.occupied[1] = true;
                     tile.tileResourceName = crops[indexNumber - 49].cropName;
                     tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
+                    if (crops[indexNumber - 49].season != season){
+                        if (crops[indexNumber - 49].dayCountdown == 1){
+                            tile.dayCountdown++;
+                        }
+                        else {
+                            tile.dayCountdown = (int) ((crops[indexNumber - 49].dayCountdown) * 1.5);
+                        }
+                    }
                     tile.season = crops[indexNumber - 49].season;
                     tile.tilePicture = "resources/tile_images/" + tile.tileResourceName + ".png";
                     drawTiles();
