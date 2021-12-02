@@ -24,17 +24,35 @@ public class Application implements Runnable {
     }
 
     public void initialization() {
+        Color background = SaxionApp.createColor(58,46,39);
+        SaxionApp.setBackgroundColor(background);
         SaxionApp.setFill(Color.black);
         crops = cropSetup();
         tiles = tileSetup();
         mainMenu();
     }
 
+    public void menuLines(){
+        SaxionApp.setBorderColor(Color.white);
+        SaxionApp.drawLine(485,0,485,800);
+        SaxionApp.drawLine(485,400,1500,400);
+        SaxionApp.drawLine(750,400,750,800);
+    }
+    public void menuRectangleGraph(){
+        SaxionApp.turnBorderOff();
+        Color ground = SaxionApp.createColor(88,70,58);
+        SaxionApp.setFill(ground);
+        SaxionApp.drawRectangle(0,0,485,600);
+        Color ground1 = SaxionApp.createColor(67,54,46);
+        SaxionApp.setFill(ground1);
+        SaxionApp.drawRectangle(485,400,1000,500);
+
+    }
     //Step1.1 mainmenu(Harun)
     public void mainMenu() {
         drawBoard();
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("Welcome to the FarmX");
+        SaxionApp.printLine("Welcome to the FarmX!");
         SaxionApp.printLine(" ");
         SaxionApp.printLine("1. New Game");
         SaxionApp.printLine(" ");
@@ -46,6 +64,7 @@ public class Application implements Runnable {
         char selection = SaxionApp.readChar();
 
         switch (selection) {
+            //new game
             case '1':
                 SaxionApp.clear();
                 drawBoard();
@@ -54,16 +73,19 @@ public class Application implements Runnable {
                 SaxionApp.clear();
                 shopMenu();
                 drawBoard();
-
-            case '2':
+                break;
                 //tutorial
+            case '2':
                 SaxionApp.clear();
                 tutorial();
                 SaxionApp.pause();
                 SaxionApp.clear();
                 mainMenu();
                 break;
+                //exit
             case '3':
+                SaxionApp.clear();
+                SaxionApp.drawText("GOOD BYE!",400,250,60);
                 break;
             default:
                 SaxionApp.printLine("Invalid selection", Color.red);
@@ -82,13 +104,14 @@ public class Application implements Runnable {
         SaxionApp.printLine(" ");
         SaxionApp.printLine("1. Plants");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("2. Animals");
+        SaxionApp.printLine("2. Animals(Don't get in it s empty rn!)");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("3. GO TO THE NEXT DAY");
+        SaxionApp.printLine("3. GO TO THE NEXT DAY >>>");
         SaxionApp.printLine(" ");
         char ss = SaxionApp.readChar();
 
         switch (ss) {
+            //1.plants
             case '1':
                 SaxionApp.clear();
                 drawBoard();
@@ -107,11 +130,15 @@ public class Application implements Runnable {
                         break;
                     case '2':
                         //sell
+                        SaxionApp.clear();
+                        drawBoard();
+                        cropsMenu();
                         break;
                     case '0':
                         shopMenu();
                 }
                 break;
+                //2.animals
             case '2':
                 SaxionApp.clear();
                 drawBoard();
@@ -123,15 +150,14 @@ public class Application implements Runnable {
                 switch (sss) {
                     case '1':
                         //buy
-                        SaxionApp.clear();
-                        drawBoard();
-                        cropsMenu();
+
                         break;
                     case '2':
                         //sell
                         break;
 
                 }
+                //3.next day
             case '3':
                 nextDay();
                 break;
@@ -146,7 +172,8 @@ public class Application implements Runnable {
     //Step2 tutorial(Harun)
     public void tutorial() {
         SaxionApp.turnBorderOff();
-        SaxionApp.setFill(Color.gray);
+        Color backTut = SaxionApp.createColor(37,30,24);
+        SaxionApp.setFill(backTut);
         int y = 100;
         int x = 150;
 
@@ -165,8 +192,10 @@ public class Application implements Runnable {
 
     public void drawBoard() {
         SaxionApp.clear();
-        SaxionApp.drawImage("resources/background.jpeg", 0, 0, 1200, 600);
-        SaxionApp.setBorderColor(Color.white);
+        menuRectangleGraph();
+        menuLines();
+        //SaxionApp.drawImage("resources/background.jpeg", 0, 0, 1200, 600);
+        //SaxionApp.setBorderColor(Color.white);
         /*SaxionApp.setBorderSize(2);
         int[] position = {850,60}; // 0 = X, 1 = Y
         int[] increments = {64,32}; // 0 = X, 1 = Y
