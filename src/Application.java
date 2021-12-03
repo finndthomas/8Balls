@@ -24,12 +24,21 @@ public class Application implements Runnable {
     }
 
     public void initialization() {
+        logoScreen();
+        SaxionApp.pause();
         Color background = SaxionApp.createColor(58, 46, 39);
         SaxionApp.setBackgroundColor(background);
         SaxionApp.setFill(Color.black);
         crops = cropSetup();
         tiles = tileSetup();
         mainMenu();
+    }
+
+    public void logoSmall(int x, int y){
+        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoSmall.png",x,y,149,118);
+    }
+    public void logoScreen(){
+        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoScreen.png",0,0,1200,675);
     }
 
     public void menuLines() {
@@ -69,10 +78,10 @@ public class Application implements Runnable {
             //new game
             case '1':
                 SaxionApp.clear();
-                drawBoard();
                 tutorial();
                 SaxionApp.pause();
                 SaxionApp.clear();
+                drawBoard();
                 shopMenu();
                 drawBoard();
                 break;
@@ -134,7 +143,6 @@ public class Application implements Runnable {
                         //sell
                         SaxionApp.clear();
                         drawBoard();
-                        cropsMenu();
                         sellMenu();
                         break;
                     case '0':
@@ -190,13 +198,15 @@ public class Application implements Runnable {
         SaxionApp.drawText("A tomato seed grows up in one day. When you continue for the other day, you'll get 20$ for harvest.", x + 30, y + 200, 13);
         SaxionApp.drawText("*You are going to start the game at LEVEL 1. This means you can buy only first 4 types of vegetables seeds. And the game", x + 30, y + 220, 13);
         SaxionApp.drawText("gives 4 empty fields for you. You will get new 2 fields at further levels and also you can unlock a field by purchasing.", x + 30, y + 240, 13);
-        SaxionApp.drawText("Press any key to skip the tutorial >>", x + 500, 450, 15);
+        SaxionApp.drawText("Press any key to skip the tutorial >>", x + 560, 450, 15);
+        logoSmall(500,360);
     }
 
     public void drawBoard() {
         SaxionApp.clear();
         menuRectangleGraph();
         menuLines();
+        logoSmall(540,440);
         //SaxionApp.drawImage("resources/background.jpeg", 0, 0, 1200, 600);
         //SaxionApp.setBorderColor(Color.white);
         /*SaxionApp.setBorderSize(2);
