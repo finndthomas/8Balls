@@ -34,11 +34,12 @@ public class Application implements Runnable {
         mainMenu();
     }
 
-    public void logoSmall(int x, int y){
-        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoSmall.png",x,y,149,118);
+    public void logoSmall(int x, int y) {
+        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoSmall.png", x, y, 149, 118);
     }
-    public void logoScreen(){
-        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoScreen.png",0,0,1200,675);
+
+    public void logoScreen() {
+        SaxionApp.drawImage("/Users/harungokcegoz/Documents/GitHub/8Balls/resources/logoScreen.png", 0, 0, 1200, 675);
     }
 
     public void menuLines() {
@@ -126,10 +127,10 @@ public class Application implements Runnable {
             case '1':
                 SaxionApp.clear();
                 drawBoard();
-                SaxionApp.printLine("1. Buy");
-
-                SaxionApp.printLine("2. Sell");
                 SaxionApp.printLine("0. Back");
+                SaxionApp.printLine("1. Buy");
+                SaxionApp.printLine("2. Sell");
+
 
                 char s = SaxionApp.readChar();
                 switch (s) {
@@ -199,14 +200,14 @@ public class Application implements Runnable {
         SaxionApp.drawText("*You are going to start the game at LEVEL 1. This means you can buy only first 4 types of vegetables seeds. And the game", x + 30, y + 220, 13);
         SaxionApp.drawText("gives 4 empty fields for you. You will get new 2 fields at further levels and also you can unlock a field by purchasing.", x + 30, y + 240, 13);
         SaxionApp.drawText("Press any key to skip the tutorial >>", x + 560, 450, 15);
-        logoSmall(500,360);
+        logoSmall(500, 360);
     }
 
     public void drawBoard() {
         SaxionApp.clear();
         menuRectangleGraph();
         menuLines();
-        logoSmall(540,440);
+        logoSmall(540, 440);
         //SaxionApp.drawImage("resources/background.jpeg", 0, 0, 1200, 600);
         //SaxionApp.setBorderColor(Color.white);
         /*SaxionApp.setBorderSize(2);
@@ -270,7 +271,7 @@ public class Application implements Runnable {
         char selection = SaxionApp.readChar();
 
         switch (selection) {
-            case '0' -> mainMenu();
+            case '0' -> shopMenu();
             case '1' -> sellFood();
             case '2' -> sellCrop();
             default -> {
