@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0a2dbe75-6d13-4ea7-9306-34e2b63ba66b" name="Changes" comment="b">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +75,8 @@
       <workItem from="1638283651297" duration="339000" />
       <workItem from="1638552049690" duration="2470000" />
       <workItem from="1638555510665" duration="225000" />
+      <workItem from="1638631618799" duration="1083000" />
+      <workItem from="1638633367295" duration="644000" />
     </task>
     <task id="LOCAL-00001" summary="buying and selling update 1">
       <created>1638117531232</created>
