@@ -1,0 +1,5 @@
+animal,cost,requirement1,quantity1,requirement2,quantity2,foodPayout,cashPayout,dayCountdown,position,infoMessage
+Cow,400,0,3,6,1,120,0,-1,0,Gives 120 food per day
+Sheep,400,1,2,4,3,80,40,-1,1,Gives 80 food and 40 coins per day
+Pig,300,3,2,5,2,800,0,3,2,"Gives 800 food after 3 days, then expires."
+Chicken,160,2,1,1,1,60,0,1,3,Gives 60 food every 2 days
