@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a2dbe75-6d13-4ea7-9306-34e2b63ba66b" name="Changes" comment="b">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameProject/Crop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameProject/Crop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameProject/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameProject/Tile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Crop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Crop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

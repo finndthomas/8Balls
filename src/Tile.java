@@ -33,7 +33,7 @@ public class Tile {
     }
 
     private void drawDefault() {
-        SaxionApp.drawImage("resources\\crops images\\default.png", tilePosition[0], tilePosition[1], 135, 85);
+        SaxionApp.drawImage("resources/crops images/default.png", tilePosition[0], tilePosition[1], 135, 85);
     }
 
 

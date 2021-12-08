@@ -1,9 +1,9 @@
 cropNames,arrayPos,costs,growDays,payout,season,seededImage,imageStep1,imageFinal
-Tomato,0,14,1,21,1,resources\crops images\seeded.png,resources\crops images\tomato\tomatoStep1.png,resources\crops images\tomato\tomatoFinal.png
-Corn,1,10,1,15,4,resources\crops images\seeded.png,resources\crops images\tomato\tomatoStep1.png,resources\crops images\tomato\tomatoFinal.png
-Lettuce,2,12,1,18,2,resources\crops images\seeded.png,resources\crops images\lettuce\lettuceStep1.png,resources\crops images\lettuce\lettuceFinal.png
-Eggplant,3,16,3,40,4,resources\crops images\seeded.png,resources\crops images\eggplant\eggplantStep1.png,resources\crops images\eggplant\eggplantFinal.png
-Potato,4,8,1,12,3,resources\crops images\seeded.png,resources\crops images\potato\potatoStep1.png,resources\crops images\potato\potatoFinal.png
-Wheat,5,20,2,40,3,resources\crops images\seeded.png,resources\crops images\wheat\wheatStep1.png,resources\crops images\wheat\wheatFinal.png
-Pumpkin,6,25,4,75,2,resources\crops images\seeded.png,resources\crops images\pumpkin\pumpkinStep1.png,resources\crops images\pumpkin\pumpkinFinal.png
-Watermelon,7,30,5,105,1,resources\crops images\seeded.png,resources\crops images\watermelon\watermelonStep1.png,resources\crops images\watermelon\watermelonFinal.png
+Tomato,0,14,1,21,1,resources/crops images/seeded.png,resources/crops images/tomato/tomatoStep1.png,resources/crops images/tomato/tomatoFinal.png
+Corn,1,10,1,15,4,resources/crops images/seeded.png,resources/crops images/tomato/tomatoStep1.png,resources/crops images/tomato/tomatoFinal.png
+Lettuce,2,12,1,18,2,resources/crops images/seeded.png,resources/crops images/lettuce/lettuceStep1.png,resources/crops images/lettuce/lettuceFinal.png
+Eggplant,3,16,3,40,4,resources/crops images/seeded.png,resources/crops images/eggplant/eggplantStep1.png,resources/crops images/eggplant/eggplantFinal.png
+Potato,4,8,1,12,3,resources/crops images/seeded.png,resources/crops images/potato/potatoStep1.png,resources/crops images/potato/potatoFinal.png
+Wheat,5,20,2,40,3,resources/crops images/seeded.png,resources/crops images/wheat/wheatStep1.png,resources/crops images/wheat/wheatFinal.png
+Pumpkin,6,25,4,75,2,resources/crops images/seeded.png,resources/crops images/pumpkin/pumpkinStep1.png,resources/crops images/pumpkin/pumpkinFinal.png
+Watermelon,7,30,5,105,1,resources/crops images/seeded.png,resources/crops images/watermelon/watermelonStep1.png,resources/crops images/watermelon/watermelonFinal.png

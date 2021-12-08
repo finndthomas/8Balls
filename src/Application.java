@@ -670,7 +670,7 @@ public class Application implements Runnable {
                         SaxionApp.sleep(1);
                         for (int i = 0; i < 3; i++) {
                             SaxionApp.removeLastPrint();
-                        } 
+                        }
                     } else {
                         String ID = selection.charAt(0) + letterUppercase;
                         for (Tile tile : tiles) {
