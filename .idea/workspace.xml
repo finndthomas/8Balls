@@ -6,12 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="0a2dbe75-6d13-4ea7-9306-34e2b63ba66b" name="Changes" comment="b">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameProject/Crop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameProject/Crop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameProject/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameProject/Tile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Corn(not yet)/corn.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Corn(not yet)/kissclipart-agriculture-clipart-crop-agriculture-clip-art-454a6cc2a2a31fcc.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Default.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Eggplant/eggplantFinal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Eggplant/eggplantFinal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Eggplant/eggplantstep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Eggplant/eggplantstep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Lettuce/lettucefinal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Lettuce/lettucefinal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Lettuce/lettucestep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Lettuce/lettucestep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Potato/potatoFinal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Potato/potatoFinal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Potato/potatoStep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Potato/potatoStep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Pumpkin/pumpkinFinal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Pumpkin/pumpkinStep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Pumpkin/pumpkinStep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Watermelon/watermelonFinal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Watermelon/watermelonStep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Watermelon/watermelonStep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Wheat/wheatFinal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Wheat/wheatFinal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/Wheat/wheatStep1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/Wheat/wheatStep1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/crops images/seeded.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops images/seeded.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/crops.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/crops.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Crop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Crop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +48,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Tile.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Application.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Tile.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="210YYwhcvDdXKCubRxhfolBuOln" />
   <component name="ProjectViewState">
@@ -83,6 +94,12 @@
       <workItem from="1638555510665" duration="225000" />
       <workItem from="1638631618799" duration="1083000" />
       <workItem from="1638633367295" duration="644000" />
+      <workItem from="1639412338567" duration="988000" />
+      <workItem from="1639480371724" duration="502000" />
+      <workItem from="1639481093488" duration="79000" />
+      <workItem from="1639485958882" duration="1055000" />
+      <workItem from="1639507092916" duration="635000" />
+      <workItem from="1639508706225" duration="120000" />
     </task>
     <task id="LOCAL-00001" summary="buying and selling update 1">
       <created>1638117531232</created>
