@@ -722,12 +722,8 @@ public class Application implements Runnable {
                                             }
                                         }
                                         tile.season = crops[indexNumber - 49].season;
-                                        drawTiles();
+                                        drawBoard();
                                         SaxionApp.printLine(crops[indexNumber - 49].cropName + " successfully planted", Color.green);
-                                        SaxionApp.sleep(1);
-                                        for (int i = 0; i < 3; i++) {
-                                            SaxionApp.removeLastPrint();
-                                        }
                                         player.cashCount -= crops[indexNumber - 49].cost;
                                         if (count == 1) {
                                             accepted = true;
@@ -795,7 +791,7 @@ public class Application implements Runnable {
                             }
                         }
                         tile.season = crops[indexNumber - 49].season;
-                        drawTiles();
+                        drawBoard();
                         SaxionApp.printLine(crops[indexNumber - 49].cropName + " successfully planted", Color.green);
                         SaxionApp.sleep(0.5);
                         player.cashCount -= crops[indexNumber - 49].cost;
@@ -912,7 +908,7 @@ public class Application implements Runnable {
             tile.tilePosition[1] = topYPos + (i % 5) * 32;
             tiles[reader.getInt(1)] = tile;
             tile.level = reader.getInt(2);
-            if (tile.level > 2) {
+            if (tile.level > 1) {
                 tile.occupied[0] = true;
             }
             i++;
