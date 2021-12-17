@@ -12,7 +12,7 @@ public class Application implements Runnable {
     Player player = new Player();
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
-    int level = 1;// level of player game 1-3
+    int level = 3;// level of player game 1-3
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
     boolean emptyList2 = false;
@@ -899,7 +899,7 @@ public class Application implements Runnable {
         reader.skipRow();
         reader.setSeparator(',');
         int topXPos = 784;
-        int topYPos = 58;
+        int topYPos = 5;
         int i = 0;
         while (reader.loadRow()) {
             Tile tile = new Tile();
@@ -1192,5 +1192,48 @@ public class Application implements Runnable {
             }
         }
     }
+    public void clearTile(){
+        boolean accepted = false;
+        while (!accepted) {
+            SaxionApp.printLine("Enter tile coordinates (number then letter)");
+            String selection = SaxionApp.readString();
+            if (selection.length() != 2) {
+                SaxionApp.printLine("Only enter two characters (e.g 3C)", Color.red);
+                SaxionApp.sleep(1);
+                for (int i = 0; i < 3; i++) {
+                    SaxionApp.removeLastPrint();
+                }
+            } else {
+                String letterUppercase = selection.substring(1, 2).toUpperCase();
+                String[] acceptedValues = {"12345", "ABCDE"};
+                if (!acceptedValues[0].contains(selection.substring(0, 1)) ||
+                        !acceptedValues[1].contains(letterUppercase)) {
+                    SaxionApp.printLine("Invalid selection", Color.red);
+                    SaxionApp.sleep(1);
+                    for (int i = 0; i < 3; i++) {
+                        SaxionApp.removeLastPrint();
+                    }
+                } else {
+                    String ID = selection.charAt(0) + letterUppercase;
+                    for (Tile tile : tiles) {
+                        if (tile.tileID.equals(ID)) {
+                            if (tile.occupied[0] || tile.occupied[1]) {
+                                tile.crop = null;
+                                tile.animal = null;
+                                accepted = true;
+                            } else if (tile.occupied[0] || tile.occupied[1]) {
+                                SaxionApp.printLine("Tile is empty", Color.red);
+                                SaxionApp.sleep(1);
+                                for (int i = 0; i < 3; i++) {
+                                    SaxionApp.removeLastPrint();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 }

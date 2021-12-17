@@ -24,25 +24,25 @@ public class Tile {
                 drawDefault();
             } else if (crop != null) {
                 if (dayCountdown <= 0) {
-                    SaxionApp.drawImage(crop.finalImage, tilePosition[0], tilePosition[1], 135, 85);
+                    SaxionApp.drawImage(crop.finalImage, tilePosition[0], tilePosition[1], 135, 120);
                 } else if (dayCountdown <= Math.round(50.0 * crop.dayCountdown / 100)) {
-                    SaxionApp.drawImage(crop.step1Image, tilePosition[0], tilePosition[1], 135, 85);
+                    SaxionApp.drawImage(crop.step1Image, tilePosition[0], tilePosition[1], 135, 120);
                 } else
-                    SaxionApp.drawImage(crop.seededImage, tilePosition[0], tilePosition[1], 135, 85);
+                    SaxionApp.drawImage(crop.seededImage, tilePosition[0], tilePosition[1], 135, 120);
             } else if (animal != null) {
-                if (dayCountdown <= 0) {
-                    SaxionApp.drawImage(animal.fullyImage, tilePosition[0], tilePosition[1], 135, 85);
-                } else if (dayCountdown < 10){
-                    SaxionApp.drawImage(animal.teenImage, tilePosition[0], tilePosition[1], 135, 85);
+                if (animal.dayCountdown >= 20) {
+                    SaxionApp.drawImage(animal.fullyImage, tilePosition[0], tilePosition[1], 135, 120);
+                } else if (animal.dayCountdown >= 10){
+                    SaxionApp.drawImage(animal.teenImage, tilePosition[0], tilePosition[1], 135, 120);
                 } else
-                    SaxionApp.drawImage(animal.babyImage, tilePosition[0], tilePosition[1], 135, 85);
+                    SaxionApp.drawImage(animal.babyImage, tilePosition[0], tilePosition[1], 135, 120);
             }
             SaxionApp.drawText(tileID, tilePosition[0] + 64, tilePosition[1] + 32, 12);//just to see tile name
         }
     }
 
     private void drawDefault() {
-        SaxionApp.drawImage("resources/crops images/default.png", tilePosition[0], tilePosition[1], 135, 85);
+        SaxionApp.drawImage("resources/crops images/default.png", tilePosition[0], tilePosition[1], 135, 120);
     }
 
 }
