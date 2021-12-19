@@ -12,7 +12,8 @@ public class Application implements Runnable {
     Player player = new Player();
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
-    int level = 3;// level of player game 1-3
+    int level = 1;// level of player game 1-3
+    int levelUpFee = 0;
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
     boolean emptyList2 = false;
@@ -125,13 +126,21 @@ public class Application implements Runnable {
         SaxionApp.printLine(" ");
         SaxionApp.printLine("1. Crops");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("2. Animals");
+        if (level < 2){
+            SaxionApp.printLine("2. Animals - Locked (Lvl2)",Color.gray);
+        }
+        else {SaxionApp.printLine("2. Animals");}
         SaxionApp.printLine(" ");
         SaxionApp.printLine("3. Upgrade");
         SaxionApp.printLine(" ");
         SaxionApp.printLine("4. Empty tile");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("5. GO TO THE NEXT DAY >>>");
+        if (level != 3){
+            levelUp(false);
+        }
+        else {SaxionApp.printLine("5. Max level",Color.gray);}
+        SaxionApp.printLine(" ");
+        SaxionApp.printLine("6. GO TO THE NEXT DAY >>>");
         SaxionApp.printLine(" ");
         char ss = SaxionApp.readChar();
 
@@ -163,7 +172,10 @@ public class Application implements Runnable {
                 break;
             //2.animals
             case '2':
-                animalsMenu();
+                if (level >= 2) {
+                    animalsMenu();
+                }
+                else {shopMenu();}
                 break;
             case '3':
                 upgradeCrop();
@@ -171,6 +183,12 @@ public class Application implements Runnable {
             case '4':
                 break;
             case '5':
+                if (level != 3) {
+                    levelUp(true);
+                }
+                else {shopMenu();}
+                break;
+            case '6':
                 nextDay();
                 break;
             default:
@@ -687,7 +705,7 @@ public class Application implements Runnable {
                                     } else {
                                         tile.dayCountdown++;
                                         tile.upgradeLevel++;
-                                        player.cashCount -= (crops[indexNumber - 1].cost * 3) / 2;
+                                        player.cashCount -= (crops[indexNumber - 1].cost * 4);
                                         drawTiles();
                                         SaxionApp.printLine(crops[indexNumber - 1].cropName + " successfully upgraded", Color.green);
                                         SaxionApp.sleep(1);
@@ -766,7 +784,7 @@ public class Application implements Runnable {
                     if (tile.tileResourceName.equals(crops[indexNumber - 1].cropName)) {
                         tile.dayCountdown+=2;
                         tile.upgradeLevel++;
-                        player.cashCount -= (crops[indexNumber - 1].cost * 3) / 2;
+                        player.cashCount -= (crops[indexNumber - 1].cost * 4);
                         drawTiles();
                         SaxionApp.printLine(crops[indexNumber - 1].cropName + " successfully upgraded", Color.green);
                         SaxionApp.sleep(0.5);
@@ -843,7 +861,7 @@ public class Application implements Runnable {
             if (plantedCrop[i] > 0){
                 keyPairs.add(i);
                 SaxionApp.printLine(keyPairs.size()+". "+crops[i].cropName+" x"+plantedCrop[i]+" - Costs "
-                +(crops[i].cost*3)/2+" per crop");
+                +(crops[i].cost*4)+" per crop");
             }
         }
         char selection = SaxionApp.readChar();
@@ -856,9 +874,10 @@ public class Application implements Runnable {
             shopMenu();
         }
         else {
+            int cost = (crops[keyPairs.get(selection-49)].cost*4);
             SaxionApp.printLine("Quantity?");
             int quantity = SaxionApp.readInt();
-            if ((quantity*crops[keyPairs.get(selection-49)].cost*3)/2 > player.cashCount){
+            if ((quantity*crops[keyPairs.get(selection-49)].cost*4) > player.cashCount){
                 SaxionApp.printLine("You do not have enough cash",Color.red);
                 SaxionApp.sleep(1);
                 upgradeCrop();
@@ -870,7 +889,7 @@ public class Application implements Runnable {
             }
             else {
                 SaxionApp.printLine("Confirm upgrade of "+quantity+"x "+crops[keyPairs.get(selection-49)].cropName+
-                        " for $"+(quantity*crops[keyPairs.get(selection-49)].cost*3)/2+"? [Y/N]",Color.yellow);
+                        " for $"+(quantity*crops[keyPairs.get(selection-49)].cost*4)+"? [Y/N]",Color.yellow);
                 char entry = SaxionApp.readChar();
                 do {
                     entry = Character.toUpperCase(entry);
@@ -893,6 +912,57 @@ public class Application implements Runnable {
         }
     }
 
+    public void levelUp (boolean skipper) {
+        if (!skipper) {
+            Color text;
+            String warning = "";
+            if (level == 1) {
+                levelUpFee = 1000;
+            } else if (level == 2) {
+                levelUpFee = 25000;
+            }
+            if (player.cashCount < levelUpFee) {
+                text = Color.red;
+                warning = " - Not enough cash.";
+            } else {
+                text = Color.green;
+            }
+            SaxionApp.printLine("5. Level up - $" + levelUpFee + "" + warning,text);
+        }
+        if (skipper){
+            if (player.cashCount < levelUpFee){
+                shopMenu();
+            }
+            SaxionApp.printLine();
+            SaxionApp.printLine("Are you sure you want to level up? [Y/N]");
+            char entry = SaxionApp.readChar();
+            do {
+                entry = Character.toUpperCase(entry);
+                switch (entry) {
+                    case 'Y' -> {
+                        player.cashCount-=levelUpFee;
+                        level++;
+                        for (Tile tile: tiles) {
+                            if (tile.level <= level){
+                                tile.occupied[0]=false;
+                            }
+                        }
+                        SaxionApp.printLine("Successfully leveled up to level "+level,Color.green);
+                        SaxionApp.sleep(1);
+                        shopMenu();
+                    }
+                    case 'N' -> shopMenu();
+                    default -> {
+                        SaxionApp.printLine("Invalid selection, try again (Y/N)", Color.red);
+                        SaxionApp.sleep(1);
+                        SaxionApp.removeLastPrint();
+                        entry = SaxionApp.readChar();
+                    }
+                }
+            } while (entry != 'Y' && entry != 'N');
+        }
+    }
+
     public Tile[] tileSetup() {
         Tile[] tiles = new Tile[25];
         CsvReader reader = new CsvReader("resources/tileindex.csv");
@@ -908,7 +978,7 @@ public class Application implements Runnable {
             tile.tilePosition[1] = topYPos + (i % 5) * 32;
             tiles[reader.getInt(1)] = tile;
             tile.level = reader.getInt(2);
-            if (tile.level > 1) {
+            if (tile.level > level) {
                 tile.occupied[0] = true;
             }
             i++;
@@ -986,6 +1056,7 @@ public class Application implements Runnable {
                                 statistics.cropStock[stockpos] +=1;
                                 if (tile.upgradeLevel > 0){
                                     player.cropStock[stockpos] += 3*tile.upgradeLevel;
+                                    tile.upgradeLevel = 0;
                                 }
                                 else {player.cropStock[stockpos] += 1;}
                                 tile.dayCountdown = 0;
@@ -1049,7 +1120,7 @@ public class Application implements Runnable {
                     }
                 }
             }
-            drawstatistic();
+            //drawstatistic();
             SaxionApp.pause();
             shopMenu();
         } else if (selection == 'N') {

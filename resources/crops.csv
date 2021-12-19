@@ -5,5 +5,5 @@ Lettuce,2,12,1,18,2,resources/crops images/seeded.png,resources/crops images/let
 Eggplant,3,16,3,40,4,resources/crops images/seeded.png,resources/crops images/eggplant/eggplantStep1.png,resources/crops images/eggplant/eggplantFinal.png
 Potato,4,8,1,12,3,resources/crops images/seeded.png,resources/crops images/potato/potatoStep1.png,resources/crops images/potato/potatoFinal.png
 Wheat,5,20,2,40,3,resources/crops images/seeded.png,resources/crops images/wheat/wheatStep1.png,resources/crops images/wheat/wheatFinal.png
-Pumpkin,6,25,4,75,2,resources/crops images/seeded.png,resources/crops images/pumpkin/pumpkinStep1.png,resources/crops images/pumpkin/pumpkinFinal.png
-Watermelon,7,30,5,105,1,resources/crops images/seeded.png,resources/crops images/watermelon/watermelonStep1.png,resources/crops images/watermelon/watermelonFinal.png
+Pumpkin,6,25,4,65,2,resources/crops images/seeded.png,resources/crops images/pumpkin/pumpkinStep1.png,resources/crops images/pumpkin/pumpkinFinal.png
+Watermelon,7,30,5,85,1,resources/crops images/seeded.png,resources/crops images/watermelon/watermelonStep1.png,resources/crops images/watermelon/watermelonFinal.png

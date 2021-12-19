@@ -1,6 +1,6 @@
 public class Player {
     String name = "default";
-    int cashCount = 50030;
+    int cashCount = 50;
     int foodCount = 0;
     boolean automaticPopulation = true;
     int[] cropStock = {0,0,0,0,0,0,0,0};
