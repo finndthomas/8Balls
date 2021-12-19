@@ -7,4 +7,7 @@ public class Animal {
     int cashPayout = 0;
     int dayCountdown = 0;
     String infoMessage = "";
+    String babyImage = "resources/tile_images/chicken.png";
+    String teenImage = "resources/tile_images/chicken.png";//Jacques
+    String fullyImage = "resources/tile_images/chicken.png";
 }
