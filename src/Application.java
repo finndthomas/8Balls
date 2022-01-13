@@ -12,7 +12,8 @@ public class Application implements Runnable {
     Player player = new Player();
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
-    int level = 1;// level of player game 1-3
+    String seasons = "";
+    int level = 3;// level of player game 1-3
     int levelUpFee = 0;
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
@@ -221,6 +222,7 @@ public class Application implements Runnable {
         logoSmall(500, 360);
     }
 
+
     public void drawBoard() {
         SaxionApp.clear();
         menuRectangleGraph();
@@ -249,9 +251,24 @@ public class Application implements Runnable {
         */
         SaxionApp.setBorderSize(0);
         drawTiles();
-        messageBox("Day: " + (dayCount), 800, 460);
-        messageBox("Food: " + (player.foodCount), 800, 500);
-        messageBox("Cash: " + (player.cashCount), 800, 540);
+        //will be added images
+        SaxionApp.drawImage("resources/Icons/seasonsIcon.png",810,410,30,30);
+        SaxionApp.drawImage("resources/Icons/foodIcon.png",810,460,30,30);
+        SaxionApp.drawImage("resources/Icons/cashIcon.png",812,510,30,30);
+        SaxionApp.drawImage("resources/Icons/dayIcon.png",812,560,30,30);
+        if(season == 1){
+            seasons = "Summer";
+        }else if(season == 2){
+            seasons = "Autumn";
+        }else if(season == 3){
+            seasons = "Winter";
+        }else if(season == 4){
+            seasons = "Spring";
+        }
+        messageBox("Season: " + (seasons), 850, 420);
+        messageBox("Food: " + (player.foodCount), 850, 470);
+        messageBox("Cash: " + (player.cashCount), 850, 520);
+        messageBox("Day: " + (dayCount), 850, 570);
     }
 
     public void drawTiles() {
