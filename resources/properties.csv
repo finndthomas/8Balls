@@ -1,5 +1,5 @@
 propertyName,cashCost,foodCost,cashPayout,position,infoMessage,propertyImage
-House,1000,200,500,0, ,resources/crops images/Eggplant/eggplantFinal.png
-Bank,2000,160,250,1,Deposited cash +10% every day (+5% every extra bank),resources/crops images/Eggplant/eggplantFinal.png
-Market,1800,100,200,2,Having a market allows you to sell crops for more cash.,resources/crops images/Eggplant/eggplantFinal.png
-Casino,3000,200,350,3,Play BlackJack here to earn more money!,resources/crops images/Eggplant/eggplantFinal.png
+House,1000,200,500,0, ,resources/Building Images/houses.png
+Bank,2000,160,250,1,Deposited cash +10% every day (+5% every extra bank),resources/Building Images/bank.png
+Market,1800,100,200,2,Having a market allows you to sell crops for more cash.,resources/Building Images/market.png
+Casino,3000,200,350,3,Play BlackJack here to earn more money!,resources/Building Images/casino.png
