@@ -13,7 +13,7 @@ public class Application implements Runnable {
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
     String seasons = "";
-    int level = 3;// level of player game 1-3
+    int level = 1;// level of player game 1-3
     int levelUpFee = 0;
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
@@ -141,13 +141,13 @@ public class Application implements Runnable {
         SaxionApp.printLine("1. Crops");
         SaxionApp.printLine(" ");
         if (level < 2) {
-            SaxionApp.printLine("2. Animals - Locked (Lvl2)", Color.gray);
+            SaxionApp.printLine("2. Animals - Locked (Lvl 2)", Color.gray);
         } else {
             SaxionApp.printLine("2. Animals");
         }
         SaxionApp.printLine(" ");
         if (level < 3) {
-            SaxionApp.printLine("3. Properties - Locked (Lvl3)", Color.gray);
+            SaxionApp.printLine("3. Properties - Locked (Lvl 3)", Color.gray);
         } else {
             SaxionApp.printLine("3. Properties");
         }
@@ -936,7 +936,7 @@ public class Application implements Runnable {
                                     } else {
                                         tile.dayCountdown++;
                                         tile.upgradeLevel++;
-                                        player.cashCount -= (crops[indexNumber - 1].cost * 4);
+                                        player.cashCount -= (crops[indexNumber - 1].cost * 2);
                                         drawBoard();
                                         for (int i = 0; i < 3; i++) {
                                             SaxionApp.removeLastPrint();
@@ -1029,7 +1029,7 @@ public class Application implements Runnable {
                     if (tile.tileResourceName.equals(crops[indexNumber - 1].cropName) && tile.upgradeLevel < 5) {
                         tile.dayCountdown += 2;
                         tile.upgradeLevel++;
-                        player.cashCount -= (crops[indexNumber - 1].cost * 4);
+                        player.cashCount -= (crops[indexNumber - 1].cost * 2);
                         drawBoard();
                         if (count == 1) {
                             SaxionApp.printLine(crops[indexNumber - 1].cropName + " successfully upgraded", Color.green);
@@ -1121,7 +1121,7 @@ public class Application implements Runnable {
             if (plantedCrop[i] > 0) {
                 keyPairs.add(i);
                 SaxionApp.printLine(keyPairs.size() + ". " + crops[i].cropName + " x" + plantedCrop[i] + " - Costs "
-                        + (crops[i].cost * 4) + " per crop");
+                        + (crops[i].cost * 2) + " per crop");
             }
         }
         char selection = SaxionApp.readChar();
@@ -1132,10 +1132,10 @@ public class Application implements Runnable {
         } else if (selection == 48) {
             shopMenu();
         } else {
-            int cost = (crops[keyPairs.get(selection - 49)].cost * 4);
+            int cost = (crops[keyPairs.get(selection - 49)].cost * 2);
             SaxionApp.printLine("Quantity?");
             int quantity = SaxionApp.readInt();
-            if ((quantity * crops[keyPairs.get(selection - 49)].cost * 4) > player.cashCount) {
+            if ((quantity * crops[keyPairs.get(selection - 49)].cost * 2) > player.cashCount) {
                 SaxionApp.printLine("You do not have enough cash", Color.red);
                 SaxionApp.sleep(1);
                 upgradeCrop();
@@ -1147,7 +1147,7 @@ public class Application implements Runnable {
                 upgradeCrop();
             } else {
                     SaxionApp.printLine("Confirm upgrade of " + quantity + "x " + crops[keyPairs.get(selection - 49)].cropName +
-                            " for $" + (quantity * crops[keyPairs.get(selection - 49)].cost * 4) + "? [Y/N]", Color.yellow);
+                            " for $" + (quantity * crops[keyPairs.get(selection - 49)].cost * 2) + "? [Y/N]", Color.yellow);
                     char entry = SaxionApp.readChar();
                     do {
                         entry = Character.toUpperCase(entry);
@@ -1484,9 +1484,9 @@ public class Application implements Runnable {
                                 }
                                 tile.dayCountdown = 0;
                                 tile.tileResourceName = "Default";
+                                tile.dayCounter = 0;
                                 tile.occupied[1] = false;
                                 tile.crop = null;
-                                drawTiles();
                             }
                         }
                     }
@@ -1529,6 +1529,7 @@ public class Application implements Runnable {
                                 if (animal.animalName.equals("Pig")) {
                                     player.foodCount += animal.foodPayout;
                                     tile.dayCountdown = 0;
+                                    tile.dayCounter = 0;
                                     tile.cropRequirement[0] = 0;
                                     tile.cropRequirement[1] = 0;
                                     tile.cropQuantity[0] = 0;
@@ -1608,20 +1609,26 @@ public class Application implements Runnable {
 
     public void checkForEnd(){//Jacques
         int i = 0;
+        int j = 0;
         for (Tile tile: tiles) {
             if (!tile.tileResourceName.equals("Default")){
                 i++;
             }
         }
+        for (int k = 0; k < player.cropStock.length; k++) {
+            j += player.cropStock[k];
+        }
         if (player.cashCount >= 1000000){
             SaxionApp.clear();
             SaxionApp.drawText("Player wins",100,100,30);
+            SaxionApp.drawText("You beat the game in "+dayCount+" days.",100,150,30);
             gameOver = true;
             SaxionApp.pause();
             shopMenu();
-        }else if (player.cashCount < 8 && i == 0){
+        }else if (player.cashCount < 8 && player.foodCount < 8 && i == 0 && j == 0){
             SaxionApp.clear();
             SaxionApp.drawText("Player loses",100,100,30);
+            SaxionApp.drawText("You survived "+dayCount+" days.",100,150,30);
             gameOver = true;
             SaxionApp.pause();
             shopMenu();
@@ -1860,7 +1867,7 @@ public class Application implements Runnable {
                 }
                 SaxionApp.drawImage("resources/sun.png", (int) x, (int) yy, 100, 100);
                 SaxionApp.drawImage("resources/images.png", -5, 400, 1205, 200);
-                SaxionApp.sleep(0.1);
+                SaxionApp.sleep(0.05);
             } else {
                 if (x > 600) {
                     Color sky = nightskyColor.get(0);
@@ -1884,7 +1891,7 @@ public class Application implements Runnable {
                 }
                 SaxionApp.drawImage("resources/moon.png", (int) x, (int) yy, 100, 100);
                 SaxionApp.drawImage("resources/images.png", -5, 400, 1205, 200);
-                SaxionApp.sleep(0.1);
+                SaxionApp.sleep(0.05);
             }
             x += 10;
         }
