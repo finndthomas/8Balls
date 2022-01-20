@@ -1,5 +1,5 @@
 animal,cost,requirement1,quantity1,requirement2,quantity2,foodPayout,cashPayout,position,infoMessage,imageStep1,imageStep2,imageStep3
-Cow,400,0,3,6,1,120,0,0,Gives 120 food per day,resources/tile_images/Chicken/babyChickenFarm.png,resources/tile_images/Chicken/babyChickenFarm.png,resources/tile_images/Chicken/babyChickenFarm.png
+Cow,400,0,3,6,1,120,0,0,Gives 120 food per day,resources/tile_images/Cow/babyCowFarm.png,resources/tile_images/Cow/cow.png,resources/tile_images/Cow/cowUpgraded.png
 Sheep,400,1,2,4,3,80,40,1,Gives 80 food and 40 coins per day,resources/tile_images/Sheep/babySheep.png,resources/tile_images/Sheep/sheep.png,resources/tile_images/Sheep/sheepUpgraded.png
 Pig,300,3,2,5,2,800,0,2,Gives 800 food after 3 days thenexpires,resources/tile_images/Pig/babyPig.png,resources/tile_images/Pig/pig.png,resources/tile_images/Pig/PigUpgraded.png
 Chicken,160,2,1,1,1,60,0,3,Gives 60 food every 2 days,resources/tile_images/Chicken/babyChickenFarm.png,resources/tile_images/Chicken/chickenFarm.png,resources/tile_images/Chicken/chickenFarmUpgraded.png
