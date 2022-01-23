@@ -1,5 +1,5 @@
 public class Player {
-    int cashCount = 5000;
+    int cashCount = 50;
     int foodCount = 0;
     boolean automaticPopulation = true;
     int[] cropStock = {0,0,0,0,0,0,0,0};

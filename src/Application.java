@@ -13,7 +13,7 @@ public class Application implements Runnable {
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
     String seasons = "";
-    int level = 3;// level of player game 1-3
+    int level = 1;// level of player game 1-3
     int levelUpFee = 0;
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
@@ -154,7 +154,7 @@ public class Application implements Runnable {
         SaxionApp.printLine(" ");
         SaxionApp.printLine("4. Upgrade");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("5. Empty tile");
+        SaxionApp.printLine("5. Options");
         SaxionApp.printLine(" ");
         if (level != 3) {
             levelUp(false);
@@ -164,7 +164,6 @@ public class Application implements Runnable {
         SaxionApp.printLine(" ");
         SaxionApp.printLine("7. GO TO THE NEXT DAY >>>");
         SaxionApp.printLine(" ");
-        SaxionApp.printLine("8. Option Menu");
         SaxionApp.printLine();
         char ss = SaxionApp.readChar();
 
@@ -304,7 +303,7 @@ public class Application implements Runnable {
                 upgradeCrop();
                 break;
             case '5':
-                clearTile();
+                option();
                 break;
             case '6':
                 if (level != 3) {
@@ -315,9 +314,6 @@ public class Application implements Runnable {
                 break;
             case '7':
                 nextDay();
-                break;
-            case '8':
-                option();
                 break;
             default:
                 SaxionApp.printLine("Invalid selection", Color.red);
@@ -967,10 +963,8 @@ public class Application implements Runnable {
                                         tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
                                         tile.crop = crops[indexNumber - 49];//Jacques. Set crop on tile
                                         if (crops[indexNumber - 49].season != season) {
-                                            if (crops[indexNumber - 49].dayCountdown == 1) {
+                                            for (int i = 0; i < 2; i++) {
                                                 tile.dayCountdown++;
-                                            } else {
-                                                tile.dayCountdown = (int) ((crops[indexNumber - 49].dayCountdown) * 1.5);
                                             }
                                         }
                                         tile.season = crops[indexNumber - 49].season;
@@ -1050,10 +1044,8 @@ public class Application implements Runnable {
                         tile.tileResourceName = crops[indexNumber - 49].cropName;
                         tile.dayCountdown = crops[indexNumber - 49].dayCountdown;
                         if (crops[indexNumber - 49].season != season) {
-                            if (crops[indexNumber - 49].dayCountdown == 1) {
+                            for (int i = 0; i < 2; i++) {
                                 tile.dayCountdown++;
-                            } else {
-                                tile.dayCountdown = (int) ((crops[indexNumber - 49].dayCountdown) * 1.5);
                             }
                         }
                         tile.season = crops[indexNumber - 49].season;
@@ -1973,17 +1965,24 @@ public class Application implements Runnable {
         }
     }
     public void option(){
-        SaxionApp.printLine("This is the option menu");
-        SaxionApp.printLine("1. Print statistics");
-        SaxionApp.printLine("2. Plant manually or automatically");
-        SaxionApp.printLine("3. Clear tiles");
+        drawBoard();
+        SaxionApp.printLine("0. Back");
+        SaxionApp.printLine("1. Show statistics");
+        String autoPopCurrent;
+        if (!player.automaticPopulation){
+            autoPopCurrent = "Manual";
+        } else {autoPopCurrent = "Automatic";}
+        SaxionApp.printLine("2. Manual or Automatic placement?: "+autoPopCurrent);
+        SaxionApp.printLine("3. Clear tile");
         char selection = SaxionApp.readChar();
         switch (selection){
+            case '0':
+                shopMenu();
             case '1':
                 printConsumtion();
                 break;
             case '2':
-                automaticPlant();
+                player.automaticPopulation = !player.automaticPopulation;
                 option();
                 break;
             case '3':
@@ -2035,15 +2034,6 @@ public class Application implements Runnable {
         }
         SaxionApp.pause();
         option();
-    }
-    public void automaticPlant(){
-        SaxionApp.printLine("Do you want to plant manually or automatically?");
-        String harvest = SaxionApp.readString();
-        if (harvest.equalsIgnoreCase("manually")){
-            player.automaticPopulation=false;
-        }else if (harvest.equalsIgnoreCase("automatically")){
-            player.automaticPopulation=true;
-        }
     }
 
     ///////////////CASINO METHODS/////////////////
