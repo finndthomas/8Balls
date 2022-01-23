@@ -13,7 +13,7 @@ public class Application implements Runnable {
     int dayCount = 1;//Season change every 30 days
     int season = 1;//1 Summer, 2 Autumn, 3 Winter, 4 Spring
     String seasons = "";
-    int level = 1;// level of player game 1-3
+    int level = 3;// level of player game 1-3
     int levelUpFee = 0;
     Statistics statistics = new Statistics();
     boolean emptyList1 = false;
@@ -164,6 +164,7 @@ public class Application implements Runnable {
         SaxionApp.printLine(" ");
         SaxionApp.printLine("7. GO TO THE NEXT DAY >>>");
         SaxionApp.printLine(" ");
+        SaxionApp.printLine("8. Option Menu");
         SaxionApp.printLine();
         char ss = SaxionApp.readChar();
 
@@ -314,6 +315,9 @@ public class Application implements Runnable {
                 break;
             case '7':
                 nextDay();
+                break;
+            case '8':
+                option();
                 break;
             default:
                 SaxionApp.printLine("Invalid selection", Color.red);
@@ -1966,6 +1970,79 @@ public class Application implements Runnable {
                     }
                 }
             }
+        }
+    }
+    public void option(){
+        SaxionApp.printLine("This is the option menu");
+        SaxionApp.printLine("1. Print statistics");
+        SaxionApp.printLine("2. Plant manually or automatically");
+        SaxionApp.printLine("3. Clear tiles");
+        char selection = SaxionApp.readChar();
+        switch (selection){
+            case '1':
+                printConsumtion();
+                break;
+            case '2':
+                automaticPlant();
+                option();
+                break;
+            case '3':
+                clearTile();
+                option();
+                break;
+        }
+    }
+    public void printConsumtion() {
+        //print the name and number of the animals
+        //print the food consumtion
+        SaxionApp.printLine("Your farm's statistics");
+        scanTile();
+    }
+    public void scanTile(){
+        int multiply = 1;
+        ArrayList<String> tileNamenotdouble = new ArrayList<>();
+        ArrayList<String> emptyTile = new ArrayList<>();
+        ArrayList<String> animalCroprequired = new ArrayList<>();
+        ArrayList<String> animalConsuption = new ArrayList<>();
+        for (Tile tile:tiles) {
+                if (tile.occupied[0]==false){
+                    if (tile.occupied[1]==true){
+                        if (!tileNamenotdouble.contains(tile.tileResourceName)){
+                            tileNamenotdouble.add(tile.tileResourceName);
+                        }
+                        if (animals!=null){
+                            String cropRequired1 = tile.cropQuantity[0]*multiply + "x "+crops[tile.cropRequirement[0]].cropName +" "+ tile.cropQuantity[1]*multiply + "x "+crops[tile.cropRequirement[1]].cropName;
+                            if (!animalCroprequired.contains(cropRequired1)){
+                                animalCroprequired.add(cropRequired1);
+                                multiply++;
+                            }
+                        }
+                    }else if (tile.occupied[1]==false){
+                        emptyTile.add("Nothing here");
+                    }
+                }
+        }
+        String cropRequired2 = animalCroprequired.get(multiply-2);
+        animalConsuption.add(cropRequired2);
+        for(int i=0;i<tileNamenotdouble.size();i++){
+            SaxionApp.printLine("You have "+tileNamenotdouble.get(i),Color.yellow);
+        }
+        for(int i=0;i<animalConsuption.size();i++){
+            SaxionApp.printLine("Food consumption "+animalConsuption.get(i),Color.yellow);
+        }
+        if (emptyTile.size()==5){
+            SaxionApp.printLine(emptyTile.get(1),Color.red);
+        }
+        SaxionApp.pause();
+        option();
+    }
+    public void automaticPlant(){
+        SaxionApp.printLine("Do you want to plant manually or automatically?");
+        String harvest = SaxionApp.readString();
+        if (harvest.equalsIgnoreCase("manually")){
+            player.automaticPopulation=false;
+        }else if (harvest.equalsIgnoreCase("automatically")){
+            player.automaticPopulation=true;
         }
     }
 
